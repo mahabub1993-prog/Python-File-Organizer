@@ -1,0 +1,61 @@
+# FILE ORGANIZER
+## User Guide – Version 1.0
+
+### 1. Introduction
+File Organizer is a Windows desktop application that automatically organizes files into separate folders based on their file types.
+
+### 2. System Requirements
+- Operating System: Windows 10 / Windows 11
+- Application: FileOrganizer.exe
+- Internet: Not required
+- Python Installation: Not required (PyInstaller standalone build)
+
+### 3. How to Start
+1. Locate FileOrganizer.exe.
+2. Double-click the application.
+3. Wait for the File Organizer window to open.
+
+### 4. Select a Folder
+1. Click the Browse Folder button.
+2. Select the folder containing files.
+3. Confirm your folder selection.
+
+### 5. Preview Files
+1. Click Preview Files.
+2. Review the file names and destination folders.
+3. Preview does not move files.
+
+### 6. Organize Files
+1. Click Organize Files.
+2. Confirm the operation.
+3. The application moves files into categorized folders.
+
+### 7. File Categories
+- PDF_Files
+- Images
+- Spreadsheets
+- Documents
+- Videos
+- Audio
+- Compressed
+- Programs
+- Presentations
+- Others
+
+### 8. Export CSV Report
+1. Click Export CSV.
+2. Choose a save location.
+3. Save the report.
+4. Open the CSV file using Microsoft Excel or another spreadsheet application.
+
+### 9. Safety Instructions
+- Always test with sample files first.
+- Keep a backup of important files.
+- Review the preview before organizing.
+- Do not interrupt the application while files are being moved.
+
+### 10. Support
+For technical assistance, contact your software provider.
+
+---
+File Organizer – Version 1.0
