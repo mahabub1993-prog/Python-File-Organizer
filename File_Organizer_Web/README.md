@@ -1,62 +1,107 @@
 # Python File Organizer
 
-**A Python-based File Organization Solution with Desktop GUI and Web Application.**
+**Automated File Management System | Desktop & Web Applications**
 
-Python File Organizer automatically organizes files into categories based on their file extensions. The project includes a Windows Desktop Application and a FastAPI-based Web Application.
+A Python-based file management solution that automatically organizes files into categories. This project includes a Windows Desktop Application and a Web Application built with FastAPI.
 
-## 🚀 Project Overview
+**Developer:** Md. Mahabub Hossain  
+**GitHub:** https://github.com/mahabub1993-prog  
+**Repository:** https://github.com/mahabub1993-prog/Python-File-Organizer
 
-Managing files manually can be time-consuming. This project simplifies file management by automatically sorting files into organized folders.
+---
 
-### Applications
+## Project Overview
 
-**1. Desktop Application**
-- Windows desktop application.
-- Graphical User Interface (GUI).
+Python File Organizer helps users organize files quickly and efficiently without manually creating folders or moving files one by one.
+
+The project currently includes:
+
+- Desktop Application – Windows-based file organizer.
+- Web Application – Browser-based file upload, automatic categorization, and ZIP download.
+
+## Applications
+
+### 1. Desktop Application
+
+A Windows desktop application for automatically organizing files.
+
+**Features**
 - Automatic file organization.
-- Categorizes files by extension.
+- File categorization by extension.
+- Separate folders for different file types.
+- CSV organization report.
+- Windows executable (`.exe`).
+- Simple graphical user interface.
 
-**2. Web Application**
-- Built with FastAPI.
-- Upload multiple files through a browser.
-- Automatically categorizes uploaded files.
-- Supports files up to 100 MB per file.
-- Upload progress indicator.
+**Customer Delivery**
+
+The ready-to-use Windows application is available in:
+
+`Customer_Delivery/`
+
+### 2. Smart File Organizer Web Application
+
+A browser-based application developed using Python FastAPI.
+
+**Features**
+- Upload multiple files.
+- Automatic file categorization.
+- Organize uploaded files into separate folders.
 - Download all organized files as a ZIP archive.
-- Simple and user-friendly interface.
+- Supports ZIP archives and multiple common file formats.
+- Upload size limit: 100 MB per file.
+- Browser-based interface.
+- REST API documentation using Swagger UI.
 
-**Web Application Source Code:**  
-[Open File_Organizer_Web](./File_Organizer_Web/)
+**File Categories**
 
-## 🛠️ Technology Stack
-
-| Component | Technology |
+| Category | Examples |
 |---|---|
-| Programming Language | Python |
-| Desktop GUI | Python GUI |
-| Web Framework | FastAPI |
-| Backend Server | Uvicorn |
-| Template Engine | Jinja2 |
-| Frontend | HTML, CSS, JavaScript |
-| Data Validation | Pydantic |
-| Version Control | Git & GitHub |
+| Documents | PDF, DOCX, TXT |
+| Images | JPG, PNG, GIF |
+| Spreadsheets | XLSX, CSV |
+| Archives | ZIP, RAR, 7Z |
+| Videos | MP4, AVI, MKV |
+| Audio | MP3, WAV |
+| Others | Other file types |
 
-## 📂 Project Structure
+## Technology Stack
+
+| Technology | Purpose |
+|---|---|
+| Python | Core programming |
+| FastAPI | Web backend |
+| Uvicorn | ASGI server |
+| Jinja2 | HTML templating |
+| HTML | Web page structure |
+| CSS | Web page styling |
+| JavaScript | Frontend interactions |
+| Pandas | CSV reporting |
+| ZIP | Download organized files |
+| Git & GitHub | Version control |
+
+## Project Structure
 
 ```text
 Python-File-Organizer/
 │
+├── Customer_Delivery/
+│   ├── FileOrganizer.exe
+│   ├── README.txt
+│   └── User_Guide.txt
+│
 ├── core/
 │   ├── __init__.py
 │   └── organizer.py
-│
-├── Customer_Delivery/
 │
 ├── File_Organizer_Web/
 │   ├── backend/
 │   │   └── main.py
 │   ├── templates/
 │   │   └── index.html
+│   ├── static/
+│   ├── tests/
+│   ├── uploads/
 │   ├── requirements.txt
 │   └── README.md
 │
@@ -67,105 +112,112 @@ Python-File-Organizer/
 └── README.md
 ```
 
-## 💻 Run the Web Application Locally
+## Run the Web Application Locally
 
-### Prerequisites
+### Requirements
 
-- Python 3.10 or later
+- Python 3.10+
 - Git
+- Windows, Linux, or macOS
 
-### Installation
-
-**1. Clone the repository**
+### Step 1: Clone Repository
 
 ```bash
 git clone https://github.com/mahabub1993-prog/Python-File-Organizer.git
 ```
 
-**2. Navigate to the Web Application folder**
+### Step 2: Open Web Application Folder
 
 ```bash
 cd Python-File-Organizer/File_Organizer_Web
 ```
 
-**3. Create a virtual environment**
+### Step 3: Create Virtual Environment
 
 ```bash
 python -m venv venv
 ```
 
-**4. Activate the virtual environment (Windows)**
+### Step 4: Activate Virtual Environment
+
+Windows PowerShell:
 
 ```powershell
 .\venv\Scripts\Activate.ps1
 ```
 
-**5. Install dependencies**
+### Step 5: Install Requirements
 
 ```bash
 pip install -r requirements.txt
 ```
 
-**6. Start the application**
+### Step 6: Start Application
 
 ```bash
 python -m uvicorn backend.main:app --reload
 ```
 
-**7. Open in your browser**
+### Step 7: Open in Browser
 
-Application:
+Web Application:
 
 http://127.0.0.1:8000
 
-API Documentation:
+Swagger API Documentation:
 
 http://127.0.0.1:8000/docs
 
-## 🔌 API Endpoints
+## API Endpoints
 
 | Method | Endpoint | Description |
 |---|---|---|
-| GET | `/` | Web application dashboard |
+| GET | `/` | Web application homepage |
 | GET | `/health` | Application health check |
 | GET | `/info` | Application information |
 | POST | `/upload` | Upload and organize files |
 | GET | `/download-all` | Download organized files as ZIP |
 
-## 📋 File Categories
+## Testing
 
-- Documents
-- Images
-- Spreadsheets
-- Archives
-- Videos
-- Audio
-- Others
+The Web Application has been tested locally with:
 
-## 🧪 Testing
-
-The Web Application has been tested locally for:
-
-- Multiple file uploads.
+- Single-file uploads.
+- Multiple-file uploads.
 - Automatic file categorization.
-- 95 MB file upload.
-- ZIP archive download.
-- ZIP extraction and file integrity.
+- ZIP archive downloads.
+- Large file upload testing (95 MB).
+- Extracted ZIP content verification.
 
-## ☁️ Deployment Status
+## Development Status
 
-- Desktop Application: Developed.
-- Web Application: Developed and locally tested.
-- Cloud Deployment: Planned.
+| Component | Status |
+|---|---|
+| Desktop Application | Completed |
+| Web Application | Developed and locally tested |
+| GitHub Repository | Published |
+| Cloud Deployment | Planned |
+| Future Automation Features | Planned |
 
-## 👨‍💻 Author
+## Future Improvements
+
+- Cloud deployment.
+- User authentication and accounts.
+- Customer-specific file management.
+- Cloud storage integration.
+- Email and Google Drive automation.
+- Advanced file processing features.
+
+## Author
 
 **Md. Mahabub Hossain**
 
-GitHub: [mahabub1993-prog](https://github.com/mahabub1993-prog)
+Python Automation | AI Automation | Telecom Engineering
 
-Project Repository: [Python-File-Organizer](https://github.com/mahabub1993-prog/Python-File-Organizer)
+GitHub: https://github.com/mahabub1993-prog
+
+LinkedIn: https://www.linkedin.com/in/md-mahabub-hossain-0846ab222
 
 ---
 
-**Built with Python to make file management easier and more efficient.**
+**Python File Organizer – Making File Management Simple and Automatic.**
