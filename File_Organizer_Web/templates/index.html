@@ -1,0 +1,625 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Smart File Organizer</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f4f7fb;
+            color: #253047;
+            min-height: 100vh;
+        }
+
+        header {
+            background: #182b49;
+            color: white;
+            padding: 28px 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin-bottom: 10px;
+            font-size: 30px;
+        }
+
+        header p {
+            color: #d8e2f0;
+        }
+
+        .container {
+            width: 92%;
+            max-width: 1050px;
+            margin: 35px auto;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 14px;
+            box-shadow: 0 4px 18px rgba(0,0,0,0.06);
+            margin-bottom: 25px;
+        }
+
+        .card h2 {
+            margin-bottom: 18px;
+        }
+
+        .upload-area {
+            border: 2px dashed #9aaec8;
+            border-radius: 12px;
+            padding: 35px 20px;
+            text-align: center;
+            background: #f9fbff;
+        }
+
+        .upload-area p {
+            margin-bottom: 15px;
+            color: #61718a;
+        }
+
+        input[type="file"] {
+            max-width: 100%;
+            margin: 10px auto;
+        }
+
+        button {
+            border: none;
+            padding: 13px 22px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: bold;
+            margin: 8px 5px;
+        }
+
+        button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .upload-btn {
+            background: #2463eb;
+            color: white;
+        }
+
+        .download-btn {
+            background: #198754;
+            color: white;
+            font-size: 16px;
+            padding: 15px 28px;
+        }
+
+        .download-btn:hover {
+            background: #146c43;
+        }
+
+        .upload-btn:hover {
+            background: #174fc5;
+        }
+
+        .progress {
+            width: 100%;
+            height: 12px;
+            background: #e5eaf2;
+            border-radius: 20px;
+            margin-top: 20px;
+            overflow: hidden;
+            display: none;
+        }
+
+        .progress-bar {
+            width: 0%;
+            height: 100%;
+            background: #2463eb;
+            transition: width 0.2s;
+        }
+
+        .result {
+            margin-top: 20px;
+            line-height: 1.8;
+            overflow-wrap: anywhere;
+        }
+
+        .success {
+            color: #198754;
+        }
+
+        .error {
+            color: #dc3545;
+        }
+
+        .file-result {
+            background: #f6f8fc;
+            border-left: 4px solid #2463eb;
+            padding: 12px;
+            margin-top: 12px;
+            border-radius: 6px;
+        }
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 15px;
+        }
+
+        .category {
+            background: #f2f6fc;
+            padding: 22px 12px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .category .icon {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .category h3 {
+            font-size: 15px;
+        }
+
+        .download-section {
+            text-align: center;
+        }
+
+        .download-section p {
+            color: #61718a;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .download-note {
+            font-size: 13px;
+            margin-top: 12px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            color: #718096;
+        }
+
+        @media(max-width: 600px) {
+
+            header h1 {
+                font-size: 23px;
+            }
+
+            .card {
+                padding: 18px;
+            }
+
+            button {
+                width: 100%;
+                margin: 8px 0;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <!-- HEADER -->
+
+    <header>
+
+        <h1>Smart File Organizer</h1>
+
+        <p>
+            Upload, Organize and Download Your Files Automatically
+        </p>
+
+    </header>
+
+
+    <main class="container">
+
+
+        <!-- UPLOAD SECTION -->
+
+        <section class="card">
+
+            <h2>Upload Your Files</h2>
+
+            <div class="upload-area">
+
+                <p>
+                    Select one or multiple files from your computer
+                </p>
+
+                <input
+                    type="file"
+                    id="fileInput"
+                    multiple
+                >
+
+                <br>
+
+                <button
+                    class="upload-btn"
+                    id="uploadBtn"
+                    type="button"
+                    onclick="uploadFiles()"
+                >
+                    Upload & Organize
+                </button>
+
+                <div class="progress" id="progress">
+
+                    <div
+                        class="progress-bar"
+                        id="progressBar"
+                    ></div>
+
+                </div>
+
+                <p id="progressText"></p>
+
+            </div>
+
+            <div class="result" id="result"></div>
+
+        </section>
+
+
+        <!-- CATEGORY SECTION -->
+
+        <section class="card">
+
+            <h2>File Categories</h2>
+
+            <div class="category-grid">
+
+                <div class="category">
+                    <div class="icon">📄</div>
+                    <h3>Documents</h3>
+                </div>
+
+                <div class="category">
+                    <div class="icon">🖼️</div>
+                    <h3>Images</h3>
+                </div>
+
+                <div class="category">
+                    <div class="icon">📊</div>
+                    <h3>Spreadsheets</h3>
+                </div>
+
+                <div class="category">
+                    <div class="icon">📦</div>
+                    <h3>Archives</h3>
+                </div>
+
+                <div class="category">
+                    <div class="icon">🎬</div>
+                    <h3>Videos</h3>
+                </div>
+
+                <div class="category">
+                    <div class="icon">🎵</div>
+                    <h3>Audio</h3>
+                </div>
+
+                <div class="category">
+                    <div class="icon">📁</div>
+                    <h3>Others</h3>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- DOWNLOAD ALL ZIP SECTION -->
+
+        <section class="card download-section">
+
+            <h2>Download Your Organized Files</h2>
+
+            <p>
+                Download all uploaded and organized files
+                together in one ZIP folder.
+            </p>
+
+            <button
+                class="download-btn"
+                type="button"
+                onclick="downloadAllFiles()"
+            >
+                📥 Download All as ZIP
+            </button>
+
+            <p class="download-note">
+                All files will be downloaded with their category folders.
+            </p>
+
+        </section>
+
+
+    </main>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <p>
+            Smart File Organizer | Powered by Python & FastAPI
+        </p>
+
+    </footer>
+
+
+    <script>
+
+
+        // =================================
+        // 1. UPLOAD FILES
+        // =================================
+
+        function uploadFiles() {
+
+            const fileInput =
+                document.getElementById("fileInput");
+
+            const files = fileInput.files;
+
+            const result =
+                document.getElementById("result");
+
+            const uploadBtn =
+                document.getElementById("uploadBtn");
+
+            const progress =
+                document.getElementById("progress");
+
+            const progressBar =
+                document.getElementById("progressBar");
+
+            const progressText =
+                document.getElementById("progressText");
+
+
+            if (!files.length) {
+
+                alert("Please select at least one file.");
+
+                return;
+
+            }
+
+
+            const formData = new FormData();
+
+
+            for (let i = 0; i < files.length; i++) {
+
+                formData.append("files", files[i]);
+
+            }
+
+
+            uploadBtn.disabled = true;
+
+            result.innerHTML = "";
+
+            progress.style.display = "block";
+
+            progressBar.style.width = "0%";
+
+            progressText.textContent = "Uploading...";
+
+
+            const xhr = new XMLHttpRequest();
+
+            xhr.open("POST", "/upload");
+
+
+            // UPLOAD PROGRESS
+
+            xhr.upload.onprogress = function(event) {
+
+                if (event.lengthComputable) {
+
+                    const percent = Math.round(
+                        (event.loaded / event.total) * 100
+                    );
+
+                    progressBar.style.width =
+                        percent + "%";
+
+                    progressText.textContent =
+                        "Upload Progress: " + percent + "%";
+
+                }
+
+            };
+
+
+            // UPLOAD RESPONSE
+
+            xhr.onload = function() {
+
+                uploadBtn.disabled = false;
+
+                let data;
+
+
+                try {
+
+                    data = JSON.parse(xhr.responseText);
+
+                } catch {
+
+                    result.innerHTML =
+                        '<p class="error">Invalid server response.</p>';
+
+                    progressText.textContent =
+                        "Upload Failed.";
+
+                    return;
+
+                }
+
+
+                if (xhr.status >= 200 && xhr.status < 300) {
+
+                    let html = `
+
+                        <h3 class="success">
+                            ${escapeHTML(data.message)}
+                        </h3>
+
+                        <p>
+                            <strong>Total files:</strong>
+                            ${data.total_files}
+                        </p>
+
+                    `;
+
+
+                    data.files.forEach(file => {
+
+                        html += `
+
+                            <div class="file-result">
+
+                                <strong>
+                                    ${escapeHTML(file.filename)}
+                                </strong>
+
+                                <br>
+
+                                Category:
+                                ${escapeHTML(file.category)}
+
+                                <br>
+
+                                Status:
+
+                                <span class="success">
+                                    ${escapeHTML(file.status)}
+                                </span>
+
+                            </div>
+
+                        `;
+
+                    });
+
+
+                    result.innerHTML = html;
+
+                    progressBar.style.width = "100%";
+
+                    progressText.textContent =
+                        "Upload Completed!";
+
+                    fileInput.value = "";
+
+
+                } else {
+
+                    const errorMessage =
+                        data.detail || "Upload failed.";
+
+                    result.innerHTML = `
+
+                        <p class="error">
+                            ${escapeHTML(String(errorMessage))}
+                        </p>
+
+                    `;
+
+                    progressText.textContent =
+                        "Upload Failed.";
+
+                }
+
+            };
+
+
+            // NETWORK ERROR
+
+            xhr.onerror = function() {
+
+                uploadBtn.disabled = false;
+
+                result.innerHTML = `
+
+                    <p class="error">
+                        Network error. Please try again.
+                    </p>
+
+                `;
+
+                progressText.textContent =
+                    "Upload Failed.";
+
+            };
+
+
+            xhr.send(formData);
+
+        }
+
+
+
+        // =================================
+        // 2. DOWNLOAD ALL FILES AS ZIP
+        // =================================
+
+        function downloadAllFiles() {
+
+            window.location.href = "/download-all";
+
+        }
+
+
+
+        // =================================
+        // 3. HTML ESCAPE SECURITY
+        // =================================
+
+        function escapeHTML(value) {
+
+            return String(value).replace(/[&<>"']/g, function(char) {
+
+                const entities = {
+
+                    "&": "&amp;",
+                    "<": "&lt;",
+                    ">": "&gt;",
+                    '"': "&quot;",
+                    "'": "&#039;"
+
+                };
+
+                return entities[char];
+
+            });
+
+        }
+
+
+    </script>
+
+</body>
+
+</html>

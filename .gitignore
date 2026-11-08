@@ -41,3 +41,9 @@ File_Organizer_Report.csv
 # Distribution packages (publish separately as releases)
 FileOrganizer_v*.zip
 Customer_Delivery/FileOrganizer.exe
+
+# Smart File Organizer Web runtime files
+File_Organizer_Web/venv/
+File_Organizer_Web/uploads/
+File_Organizer_Web/__pycache__/
+File_Organizer_Web/.pytest_cache/
